@@ -1,0 +1,21 @@
+services:
+  cisco-ise:
+    container_name: cisco-ise
+    image: qemux/qemu-docker
+    environment:
+      DISK_SIZE: "300G"
+      RAM_SIZE: "16G"
+      CPU_CORES: "4"
+    volumes:
+      - ./example.iso:/boot.iso
+    devices:
+      - /dev/kvm
+    ports:
+      - 8006:8006
+    networks:
+      - observability
+    stop_grace_period: 2m
+
+networks:
+  observability:
+    external: true

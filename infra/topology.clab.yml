@@ -1,0 +1,30 @@
+---
+name: clab
+prefix: observability
+
+mgmt:
+  network: observability
+
+topology:
+
+  nodes:
+    ### Routers ###
+    Router1:
+      kind: cisco_c8000v
+      image: vrnetlab/vr-c8000v:17.06.02
+      group: router
+      startup-config: ./configs/devnete/xe.conf
+    Router2:
+      kind: cisco_csr1000v
+      image: vrnetlab/vr-csr:17.03.04
+      group: router
+      startup-config: ./configs/devnete/xe.conf
+    NexusSwitch:
+      kind: cisco_n9kv
+      image: vrnetlab/vr-n9kv:9.3.9
+      group: router
+      startup-config: ./configs/devnete/nexus.conf
+
+  links:
+    - endpoints: ["Router1:eth1", "Router2:eth1"]
+    - endpoints: ["Router1:eth2", "NexusSwitch:eth1"]
