@@ -20,5 +20,5 @@ services:
   loki:
     image: grafana/loki:latest
     volumes:
-      - ./configs/loki:/etc/loki
+      - ./configs/loki:/etc/loki:ro
     command: --config.file=/etc/loki/loki-config.yml
